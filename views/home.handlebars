@@ -28,11 +28,13 @@
   </thead>
   <tbody>
     {{#each users}}
+      {{#each this}}
       <tr>
-        {{#each this}}
-          <td>{{this}}</td>
-        {{/each}}
+          <td>{{this.name}}</td>
+          <td>{{this.lastname}}</td>
+          <td>{{this.dni}}</td>
       </tr>
+      {{/each}}
     {{/each}}
   </tbody>
 </table>
