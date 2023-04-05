@@ -1,7 +1,8 @@
 const express = require('express');
 const { engine } = require('express-handlebars');
-
-const users = [];
+const usersRouter = require('./routes/user');
+const { port } = require('./config/environment');
+const connectToDb = require('./config/connectToDb');
 
 const app = express();
 
@@ -12,22 +13,11 @@ app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
-app.get('/user', (req, res) => {
-  res.render('home', { users });
+app.use('/user', usersRouter);
+
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!');
 });
 
-app.post('/user', (req, res) => {
-  const { name, lastname, dni } = req.body;
-
-  console.log({ name, lastname, dni });
-  users.push({ name, lastname, dni });
-
-  res.redirect('/user');
-});
-
-app.get('/user-json', (req, res) => {
-  res.json({ users });
-});
-
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+connectToDb().then(() => app.listen(port, () => console.log(`Listening on port ${port}`)));
