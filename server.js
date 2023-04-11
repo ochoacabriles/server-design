@@ -2,7 +2,7 @@ const express = require('express');
 const { engine } = require('express-handlebars');
 const usersRouter = require('./routes/user');
 const { port } = require('./config/environment');
-const connectToDb = require('./config/connectToDb');
+const MemoryDao = require('./dao/memory');
 
 const app = express();
 
@@ -20,4 +20,4 @@ app.use(function (err, req, res, next) {
   res.status(500).send('Something broke!');
 });
 
-connectToDb().then(() => app.listen(port, () => console.log(`Listening on port ${port}`)));
+app.listen(port, () => console.log(`Listening on port ${port}`));
