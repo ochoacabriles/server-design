@@ -5,20 +5,12 @@ const usersRouter = Router();
 
 usersRouter.get('/', async (req, res) => {
   const users = await getUsers();
-  console.log(JSON.stringify(users, null, 2));
-  res.render('home', { users });
+  res.json(users);
 });
 
 usersRouter.post('/', async (req, res) => {
-  await addUser(req.body);
-
-  const users = await getUsers();
-  res.render('home', { users });
-});
-
-usersRouter.get('/json', async (req, res) => {
-  const users = await getUsers();
-  res.json(users);
+  const user = await addUser(req.body);
+  res.json(user);
 });
 
 usersRouter.get('/:id', async (req, res, next) => {

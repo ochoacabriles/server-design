@@ -1,4 +1,4 @@
-const { getAllUsers, addSingleUser, getUserById } = require("../model/users");
+const { getAllUsers, addSingleUser, getUserById } = require('../dto/user');
 
 const getUsers = async () => {
   const users = await getAllUsers();
@@ -7,7 +7,7 @@ const getUsers = async () => {
 
 const addUser = async (user) => {
   if (user.name && user.lastname && user.dni) {
-    const addedUser = await addSingleUser(user);
+    const addedUser = addSingleUser(user);
     return addedUser;
   }
 
@@ -15,7 +15,7 @@ const addUser = async (user) => {
 };
 
 const getUser = async (id) => {
-  const user = await getUserById(id);
+  const user = getUserById(id);
   return user;
 }
 
