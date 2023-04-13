@@ -5,10 +5,10 @@ const Form = () => {
   const [name, setName] = useState('');
   const [lastname, setLastname] = useState('');
   const [dni, setDni] = useState('');
+  const [data, setData] = useState(undefined)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    alert(`Your name is ${name} ${lastname} and your dni is ${dni}`);
     const response = await axios(
       {
         method: 'post',
@@ -21,9 +21,17 @@ const Form = () => {
       }
     );
 
-    console.log(response);
-  }
+    setData(response.data);
+  };
 
+  if (data) {
+    return (
+      <div>
+        <p>{`Thanks for submitting ${data.nickname}. Your code is ${data.randomCode}`}</p>
+        <button onClick={() => setData(undefined)}>Submit another user</button>
+      </div>
+    )
+  }
   return (
     <form onSubmit={handleSubmit}>
       <div>
