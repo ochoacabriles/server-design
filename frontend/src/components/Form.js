@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 
 const Form = () => {
   const [name, setName] = useState('');
@@ -9,26 +8,38 @@ const Form = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await axios(
+    const response = await fetch('http://localhost:3000/user',
       {
         method: 'post',
-        url: 'http://localhost:3000/user',
-        data: {
+        headers: {
+          'Content-Type': 'application/json',
+          'Credentials': 'include',
+        },
+        body: JSON.stringify({
           name,
           lastname,
           dni,
-        }
-      }
+        }),
+      },
     );
 
-    setData(response.data);
+    const receivedData = await response.json();
+    console.log(receivedData);
+    setData(receivedData);
+  };
+
+  const resetValues = () => {
+    setName('');
+    setLastname('');
+    setDni('');
+    setData(undefined);
   };
 
   if (data) {
     return (
       <div>
         <p>{`Thanks for submitting ${data.nickname}. Your code is ${data.randomCode}`}</p>
-        <button onClick={() => setData(undefined)}>Submit another user</button>
+        <button onClick={resetValues}>Submit another user</button>
       </div>
     )
   }

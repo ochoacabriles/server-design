@@ -8,7 +8,11 @@ const useUsers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/user');
+        const response = await fetch('http://localhost:3000/user', {
+          headers: {
+            'Credentials': 'include',
+          },
+        });
         const data = await response.json();
         setUsers(data);
       } catch (error) {
