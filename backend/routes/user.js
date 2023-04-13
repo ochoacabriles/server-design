@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const cors = require('cors');
 const { addUser, getUsers, getUser } = require('../controllers/user');
 
 const usersRouter = Router();
@@ -18,7 +19,7 @@ usersRouter.get('/:id', async (req, res, next) => {
   try {
     const user = await getUser(id);
   
-    res.json({ user });
+    res.json(user);
   } catch (err) {
     next(err);
   }
