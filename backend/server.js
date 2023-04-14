@@ -1,17 +1,16 @@
 const express = require('express');
-const { engine } = require('express-handlebars');
+const cors = require('cors');
 const usersRouter = require('./routes/user');
 const { port } = require('./config/environment');
-const MemoryDao = require('./dao/memory');
 
 const app = express();
+app.use(cors({
+  origin: 'http://localhost:3001',
+  credentials: true,
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-app.engine('handlebars', engine());
-app.set('view engine', 'handlebars');
-app.set('views', './views');
 
 app.use('/user', usersRouter);
 
