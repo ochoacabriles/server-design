@@ -16,6 +16,11 @@ app.use('/user', usersRouter);
 
 app.use(function (err, req, res, next) {
   console.error(err.stack)
+  if (err.message === 'Invalid user') {
+    res.status(400).send('Invalid user');
+    return;
+  }
+
   res.status(500).send('Something broke!');
 });
 

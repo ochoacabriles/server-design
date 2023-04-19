@@ -9,9 +9,13 @@ usersRouter.get('/', async (req, res) => {
   res.json(users);
 });
 
-usersRouter.post('/', async (req, res) => {
-  const user = await addUser(req.body);
-  res.json(user);
+usersRouter.post('/', async (req, res, next) => {
+  try {
+    const user = await addUser(req.body);
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
 });
 
 usersRouter.get('/:id', async (req, res, next) => {
