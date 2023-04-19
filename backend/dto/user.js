@@ -1,12 +1,13 @@
 const { randomUUID } = require("crypto");
 const getDao = require("../dao");
 
-const mapUser = (user) => ({
-  name: user.name,
-  lastname: user.lastname,
-  nickname: `${user.name} ${user.lastname}`,
-  randomCode: randomUUID(),
-});
+const mapUser = (user) => user
+  ? ({
+    name: user.name,
+    lastname: user.lastname,
+    nickname: `${user.name} ${user.lastname}`,
+    randomCode: randomUUID(),
+  }) : null;
 
 const getUserById = async (id) => {
   const dao = await getDao();

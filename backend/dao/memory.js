@@ -1,4 +1,4 @@
-const users = [];
+let users = [];
 
 class MemoryClient {
   async connect() {
@@ -18,6 +18,10 @@ class MemoryClient {
   getUserById = async (id) => {
     const user = users.find((user) => user.id === id);
     return user;
+  };
+
+  clear = async () => {
+    users = [];
   };
 }
 

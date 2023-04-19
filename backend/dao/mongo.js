@@ -23,6 +23,11 @@ class MongoClient {
     const user = await User.findById(id);
     return user;
   };
+
+  clear = async () => {
+    // Not implemented for security reasons
+    // await User.deleteMany({});
+  };
 }
 
 module.exports = MongoClient;
