@@ -1,3 +1,5 @@
+const { randomUUID } = require('crypto');
+
 let users = [];
 
 class MemoryClient {
@@ -11,8 +13,9 @@ class MemoryClient {
   };
   
   addSingleUser = async (user) => {
-    users.push(user);
-    return user;
+    const newUser = { _id: randomUUID(), ...user };
+    users.push(newUser);
+    return newUser;
   };
   
   getUserById = async (id) => {

@@ -24,9 +24,13 @@ components:
     UserOutput:
       type: object
       required:
+        - id
         - nickname
         - randomCode
       properties:
+        id:
+          type: string
+          description: Unique identifier of the user
         nickname:
           type: string
           description: Concatenation of name and lastname of the user
@@ -34,5 +38,10 @@ components:
           type: string
           description: Random UUID generated on the fly on every request
       example:
+        id: 642cea3860d4b934ab3358c5
         nickname: Lionel Messi
         randomCode: 303278a4-0340-4e49-80a2-7a361e1a87ad
+    UsersOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserOutput'

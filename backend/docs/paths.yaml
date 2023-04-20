@@ -25,7 +25,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserOutput'
+                $ref: '#/components/schemas/UsersOutput'
   /user/{id}:
     get:
       summary: Gets a single user mapped with nickname and randomCode

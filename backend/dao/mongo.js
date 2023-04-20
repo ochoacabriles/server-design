@@ -16,7 +16,7 @@ class MongoClient {
   addSingleUser = async (user) => {
     const newUser = new User(user);
     await newUser.save();
-    return user;
+    return newUser;
   };
   
   getUserById = async (id) => {
