@@ -3,6 +3,7 @@ const getDao = require("../dao");
 
 const mapUser = (user) => user
   ? ({
+    id: user._id.toString(),
     name: user.name,
     lastname: user.lastname,
     nickname: `${user.name} ${user.lastname}`,
@@ -24,12 +25,12 @@ const getAllUsers = async () => {
 const addSingleUser = async (user) => {
   const dao = await getDao();
 
-  dao.addSingleUser({
+  const newUser = await dao.addSingleUser({
     ...user,
     createdAt: new Date(),
   });
 
-  return mapUser(user);
+  return mapUser(newUser);
 };
 
 module.exports = { getUserById, getAllUsers, addSingleUser };
