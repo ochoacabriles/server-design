@@ -1,0 +1,38 @@
+# User
+components:
+  schemas:
+    UserInput:
+      type: object
+      required:
+        - name
+        - lastname
+        - dni
+      properties:
+        name:
+          type: string
+          description: First name of the user
+        lastname:
+          type: string
+          description: Lastname of the user
+        dni:
+          type: string
+          description: DNI of the user
+      example:
+        name: Lionel
+        lastname: Messi
+        dni: goat
+    UserOutput:
+      type: object
+      required:
+        - nickname
+        - randomCode
+      properties:
+        nickname:
+          type: string
+          description: Concatenation of name and lastname of the user
+        randomCode:
+          type: string
+          description: Random UUID generated on the fly on every request
+      example:
+        nickname: Lionel Messi
+        randomCode: 303278a4-0340-4e49-80a2-7a361e1a87ad

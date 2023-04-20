@@ -1,0 +1,40 @@
+paths:
+  /user:
+    post:
+      summary: 'Creates a user'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        "200":
+          description: "Created user mapped with nickname and randomCode"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserOutput'
+        "400":
+          description: "Error Invalid user, if requestBody doesn't include required fields"
+    get:
+      summary: 'Gets list of all users'
+      responses:
+        "200":
+          description: "List of all users mapped with nickname and randomCode"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserOutput'
+  /user/{id}:
+    get:
+      summary: Gets a single user mapped with nickname and randomCode
+      responses:
+        "200":
+          description: "User object mapped with nickname and randomCode"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/UserOutput'
+                  - type: null
