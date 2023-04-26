@@ -5,6 +5,8 @@ const swaggerUi = require('swagger-ui-express');
 const usersRouter = require('./routes/user');
 const { port } = require('./config/environment');
 const { swaggerSpecs } = require('./docs/config');
+const { expressMiddleware } = require('@apollo/server/express4');
+const { server } = require('./graphql/server');
 
 const app = express();
 
@@ -30,4 +32,8 @@ app.use(function (err, req, res, next) {
   res.status(500).send('Something broke!');
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+server.start()
+  .then(() => {
+    app.use('/graphql', expressMiddleware(server));
+    app.listen(port, () => console.log(`Listening on port ${port}`));
+  });
